@@ -37,12 +37,19 @@
    }
    </script>
    <form name='myform'>
-    <select name='beetype' id='beetype'>
-    <option name='queen'>Queen</option>
-    <option name='worker'>Worker</option>
-    <option name='drone'>Drone</option>
-    </select>
-    <input type='submit' value='Choose' onClick='makeBee(this.form.beetype.value); return false;'/>
+        <select name='beetype' id='beetype'>
+            <option name='queen'>Queen</option>
+            <option name='worker'>Worker</option>
+            <option name='drone'>Drone</option>
+        </select>
+        <input type='submit' id='submit' value='Choose'/>
     </form>
+    <script>
+    // hook on event listeners
+    var el = document.getElementById('submit');
+    el.addEventListener('click',function () {
+                                    makeBee(this.form.beetype.value);
+                                },false);
+    </script>
    </body>
 </html>
