@@ -6,5 +6,43 @@
    <p>Hello</p>
    <p>Hello again</p>
    <p> a change from io9</p>
+   <script>
+   // show example of objects
+   
+   // a Bee object that has a type attribute and a work function
+   function Bee(beetype) {
+     this.beetype = beetype;
+     this.doJob = function() {
+       var job = 'forage';
+       switch (this.beetype) {
+         case 'queen':
+           job = '';
+           break;
+         case 'drone':
+           job = 'fly with the queens';
+           break;
+         case 'worker':
+         default:
+           job = 'forage';
+           break;
+       }
+       alert('I am a ' + this.beetype + ' I ' + job);
+     }
+   }
+   
+   // Make a bee object and then call the function doJob()
+   function makeBee(beetype) {
+     var bee = Bee(beetype);
+     bee.doJob();
+   }
+   </script>
+   <form name='myform'>
+    <select name='beetype' id='beetype'>
+    <option name='queen'>Queen</option>
+    <option name='worker'>Worker</option>
+    <option name='drone'>Drone</option>
+    </select>
+    <input type='submit' value='Choose' onClick='makeBee(this.form.beetype); return false;'/>
+    </form>
    </body>
 </html>
