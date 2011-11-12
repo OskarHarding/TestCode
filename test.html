@@ -10,18 +10,18 @@
    // show example of objects
    
    // a Bee object that has a type attribute and a work function
-   function Bee(beetype) {
+   function MyBee(beetype) {
      this.beetype = beetype;
      this.doJob = function() {
        var job = 'forage';
        switch (this.beetype) {
-         case 'queen':
-           job = '';
+         case 'Queen':
+           job = 'lay eggs, and fly with drones';
            break;
-         case 'drone':
+         case 'Drone':
            job = 'fly with the queens';
            break;
-         case 'worker':
+         case 'Worker':
          default:
            job = 'forage';
            break;
@@ -32,7 +32,7 @@
    
    // Make a bee object and then call the function doJob()
    function makeBee(beetype) {
-     var bee = Bee(beetype);
+     var bee = new MyBee(beetype);
      bee.doJob();
    }
    </script>
@@ -42,7 +42,7 @@
     <option name='worker'>Worker</option>
     <option name='drone'>Drone</option>
     </select>
-    <input type='submit' value='Choose' onClick='makeBee(this.form.beetype); return false;'/>
+    <input type='submit' value='Choose' onClick='makeBee(this.form.beetype.value); return false;'/>
     </form>
    </body>
 </html>
