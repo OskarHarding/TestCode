@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Oskars test page (3)</title>
+  </head>
+  <body>
+   <p>A Swarm (2)</p>
+   <script>
+   // show example of objects
+   
+   // a Bee object that has a type attribute and a work function
+   function MyBee(beetype) {
+     this.beetype = beetype;
+     this.doJob = function() {
+       var job = 'forage';
+       switch (this.beetype) {
+         case 'Queen':
+           job = 'lay eggs, and fly with drones';
+           break;
+         case 'Drone':
+           job = 'fly with the queens';
+           break;
+         case 'Worker':
+         default:
+           job = 'forage';
+           break;
+       }
+       alert('I am a ' + this.beetype + ' I ' + job);
+     }
+   }
+   
+   // Make a bee object and then call the function doJob()
+   function makeBees(count) {
+    
+        var a = [new MyBee('Queen')];
+        
+        for (i=0;i<count;i++) {
+            var bee = new MyBee('Worker');
+            a.append(bee);
+        }
+        alert('no. of bees: ' + a.length);
+   }
+   </script>
+   <form name='myform'>
+        <input type='text' size='2' id='count' value='2' />
+        <input type='submit' id='submit' value='Run' onClick='false;'/>
+    </form>
+    <script>
+    // hook on event listeners
+    var el = document.getElementById('submit');
+    el.addEventListener('click',function () {
+                                    makeBees(this.form.count.value);
+                                },false);
+    </script>
+   </body>
+</html>
