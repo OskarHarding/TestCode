@@ -30,24 +30,26 @@
    
    // Make a bee object and then call the function doJob()
    function makeBees(count) {
-    
         var a = [new MyBee('Queen')];
-        
-        for (i=0;i<count;i++) {
+        for (i=0; i<count; i++) {
             var bee = new MyBee('Worker');
-            a.append(bee);
+            a.push(bee);
         }
         alert('no. of bees: ' + a.length);
    }
    </script>
    <form name='myform'>
-        <input type='text' size='2' id='count' value='2' />
-        <input type='submit' id='submit' value='Run' onClick='false;'/>
+        <input type='text' size='2' id='count' value='10' />
+        <input type='submit' id='submit' value='Run'/>
     </form>
     <script>
     // hook on event listeners
     var el = document.getElementById('submit');
-    el.addEventListener('click',function () {
+    el.addEventListener('click',function (e) {
+                                    if (e.preventDefault) {
+                                        e.preventDefault();
+                                    };
+                                    e.returnValue = false;
                                     makeBees(this.form.count.value);
                                 },false);
     </script>

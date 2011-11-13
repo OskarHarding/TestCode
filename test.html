@@ -47,7 +47,11 @@
     <script>
     // hook on event listeners
     var el = document.getElementById('submit');
-    el.addEventListener('click',function () {
+    el.addEventListener('click',function (e) {
+                                    if (e.preventDefault) {
+                                        e.preventDefault();
+                                    };
+                                    e.returnValue = false;
                                     makeBee(this.form.beetype.value);
                                 },false);
     </script>
