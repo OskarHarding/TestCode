@@ -1,11 +1,9 @@
 <html>
   <head>
-    <title>Oskars test page</title>
+    <title>Oskars test page (3)</title>
   </head>
   <body>
-   <p>Hello</p>
-   <p>Hello again</p>
-   <p> a change from io9</p>
+   <p>A Swarm (2)</p>
    <script>
    // show example of objects
    
@@ -31,18 +29,18 @@
    }
    
    // Make a bee object and then call the function doJob()
-   function makeBee(beetype) {
-     var bee = new MyBee(beetype);
-     bee.doJob();
+   function makeBees(count) {
+        var a = [new MyBee('Queen')];
+        for (i=0; i<count; i++) {
+            var bee = new MyBee('Worker');
+            a.push(bee);
+        }
+        alert('no. of bees: ' + a.length);
    }
    </script>
    <form name='myform'>
-        <select name='beetype' id='beetype'>
-            <option name='queen'>Queen</option>
-            <option name='worker'>Worker</option>
-            <option name='drone'>Drone</option>
-        </select>
-        <input type='submit' id='submit' value='Choose'/>
+        <input type='text' size='2' id='count' value='10' />
+        <input type='submit' id='submit' value='Run'/>
     </form>
     <script>
     // hook on event listeners
@@ -52,7 +50,7 @@
                                         e.preventDefault();
                                     };
                                     e.returnValue = false;
-                                    makeBee(this.form.beetype.value);
+                                    makeBees(this.form.count.value);
                                 },false);
     </script>
    </body>

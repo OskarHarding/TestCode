@@ -1,11 +1,9 @@
 <html>
   <head>
-    <title>Oskars test page</title>
+    <title>Oskars test page (2)</title>
   </head>
   <body>
-   <p>Hello</p>
-   <p>Hello again</p>
-   <p> a change from io9</p>
+   <p>A Swarm</p>
    <script>
    // show example of objects
    
@@ -32,8 +30,12 @@
    
    // Make a bee object and then call the function doJob()
    function makeBee(beetype) {
-     var bee = new MyBee(beetype);
-     bee.doJob();
+     var b1 = new MyBee(beetype);
+     b1.doJob();
+     var b2 = new MyBee('Worker');
+     b2.doJob();
+     var b2 = new MyBee('Drone');
+     b3.doJob();
    }
    </script>
    <form name='myform'>
