@@ -1,11 +1,57 @@
-<html>
-  <head>
-    <title>oskarlator</title>
-  </head>
-  <body>
-   <p></p>
+   <html>
+   <head>
+   <title>oskarlator</title>
+   </head>
+   <body>
+   <p>oskar + calculator = oskarlator - again </p>
+   <form id="calc">
+   <input id="first" type="text" size="5" value="0"/>
+   <select id="operator">
+   <option name="+">+</option>
+   <option name="-">-</option>
+   <option name="*">*</option>
+   <option name="/">/</option>
+   </select>
+   <input id="second" type="text" size="5" value="0"/>
+   <input type='submit' id='submit' value='enter and calculate'/>
+        =   
+   <div id="answer" style="display: inline; color: #1d551d;">0</div>
+   </form>
    <script>
+    function oskarlator (vs) {
+        var r = 0;
+        var f = parseFloat(vs.first.value);
+        var s = parseFloat(vs.second.value);
+        switch (vs.operator.value) {
+            case "-":
+                r = f - s;
+                break;
+            case "+":
+                r = f + s;
+                break;
+            case "*":
+                r = f * s;
+                break;
+            case "/":
+                r = f / s;
+                break;
+            default : 
+                alert("error check spelling");
+                break;
+        }
+        var el = document.getElementById('answer');
+        el.innerHTML = String(r);
+    }
+    
+    var el = document.getElementById('submit');
+    el.addEventListener('click',function (e) {
+                                    if (e.preventDefault) {
+                                        e.preventDefault();
+                                    };
+                                    e.returnValue = false;
+                                    oskarlator(this.form);
+                                },false);
      
-     </script>
+   </script>
    </body>
-</html>
+   </html>
