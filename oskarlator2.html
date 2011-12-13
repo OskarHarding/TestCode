@@ -5,27 +5,32 @@
    
    .left {
        float: left;
-       width: 33%;
-       margin: 0;
-       padding: 0;
+       width: 27%;
+       margin: 1px;
+       padding: 2px;
+       border: 1px solid;
+   }
+   .left-blank {
+       float: left;
+       width: 27%;
+       margin: 1px;
+       padding: 2px;
    }
    .right {
        float: right;
-       width: 33%;
-       margin: 0;
-       padding: 0;
-   }
-   .middle {
-       width: 33%;
-       margin: 0;
-       padding: 0;
+       width: 27%;
+       margin: 1px;
+       padding: 2px;
+       border: 1px solid;
    }
    .clearer {
        clear: both;
        width: auto;
    }
    #calculator {
-       width: auto;
+       width: 120px;
+       border: 1px solid;
+       margin: 2px;
        text-align: center;
    }
    </style>
@@ -42,12 +47,11 @@
               ['7', '8', '9'],
               ['4', '5', '6'],
               ['1', '2', '3'],
-              [' ', '0', '=']];
+              ['0', '=', 'C']];
 
    var c = document.getElementById('calculator');
    var str = '';
    for (var i=0;i<pad.length;i++) {
-       
        str = str+'<div class="row">';
        var r = pad[i];
        for (j=0;j<r.length;j++) {
@@ -62,12 +66,50 @@
                     cls = 'left';
                     break;
            }
-           str = str + '<div class="' + cls + '">' + r[j] + '</div>';
+           if (r[j] == ' ') {
+               cls = cls + '-blank';
+           }
+           str = str + '<div id="' + r[j] + '" class="' + cls + '">' + r[j] + '</div>';
        }
        
        str = str + '<div class="clearer"></div></div>';
    }
    c.innerHTML = str;
+
+   for (var i=0;i<pad.length;i++) {
+       str = str+'<div class="row">';
+       var r = pad[i];
+       for (j=0;j<r.length;j++) {
+           if (r[j] != ' ') {
+                var el = document.getElementById(r[j]);
+                el.addEventListener('click',function (e) {
+                                                    if (e.preventDefault) {
+                                                        e.preventDefault();
+                                                    };
+                                                    e.returnValue = false;
+                                                    alert(this.id);
+                                                },false);
+                el.addEventListener('mouseover',function (e) {
+                                                    if (e.preventDefault) {
+                                                        e.preventDefault();
+                                                    };
+                                                    e.returnValue = false;
+                                                    this.style.backgroundColor = 'red';
+                                                },false);
+                el.addEventListener('mouseout',function (e) {
+                                                    if (e.preventDefault) {
+                                                        e.preventDefault();
+                                                    };
+                                                    e.returnValue = false;
+                                                    this.style.backgroundColor = 'white';
+                                                },false);
+           }
+       }
+   }
+
+
+
+
    </script>
    
    <form id="calc">
