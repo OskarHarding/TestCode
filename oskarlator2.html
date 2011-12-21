@@ -1,0 +1,157 @@
+   <html>
+   <head>
+   <title>oskarlator</title>
+   <style>
+
+   .left {
+       float: left;
+       width: 27%;
+       margin: 1px;
+       padding: 2px;
+       border: 1px solid;
+   }
+   .left-blank {
+       float: left;
+       width: 27%;
+       margin: 1px;
+       padding: 2px;
+   }
+   .right {
+       float: right;
+       width: 27%;
+       margin: 1px;
+       padding: 2px;
+       border: 1px solid;
+   }
+   .clearer {
+       clear: both;
+       width: auto;
+   }
+   #calculator {
+       width: 120px;
+       border: 1px solid;
+       margin: 2px;
+       text-align: center;
+       float: left;
+   }
+   #container {
+       width: 250px;
+       text-align: center;
+       vertical-align: middle;
+   }
+   #result {
+       float: right;
+       position: relative;
+       top: 70px;
+   }
+   </style>
+   </head>
+   <body>
+   <p>oskar + calculator = oskarlator - again (v2) </p>
+   <div id='container'>
+       <div id="calculator">
+       </div>
+       <div id='result'>
+            =
+            <div id="answer" style="display: inline; color: #1d551d;">0</div>
+       </div>
+       <div class='clearer'></div>
+   </div>
+   <script>
+   // the accumulator
+   var sum_str = '';
+   
+   //alert('here');
+   var pad = [['/', '*', '.'],
+              [' ', '+', '-'],
+              ['7', '8', '9'],
+              ['4', '5', '6'],
+              ['1', '2', '3'],
+              ['0', '=', 'C']];
+
+   var c = document.getElementById('calculator');
+   var str = '';
+   for (var i=0;i<pad.length;i++) {
+       str = str+'<div class="row">';
+       var r = pad[i];
+       for (j=0;j<r.length;j++) {
+           switch (j) {
+               case 0:
+                   cls = 'left';
+                   break;
+               case 2:
+                   cls = 'right';
+                   break;
+               default:
+                    cls = 'left';
+                    break;
+           }
+           if (r[j] == ' ') {
+               cls = cls + '-blank';
+           }
+           str = str + '<div id="' + r[j] + '" class="' + cls + '">' + r[j] + '</div>';
+       }
+
+       str = str + '<div class="clearer"></div></div>';
+   }
+   c.innerHTML = str;
+
+   function resetMyBackground(elem) {
+     setTimeout(function () {
+               elem.style.backgroundColor = 'white';
+           },
+        200);
+   }
+   
+   function accumulate_calc(key) {
+        if (key == 'C') {
+            sum_str = '';
+        }
+        else if (key == '=') {
+            sum_str = eval(sum_str);
+        }
+        else {
+            sum_str = sum_str + key;
+        }
+        return sum_str;
+   }
+
+   for (var i=0;i<pad.length;i++) {
+       str = str+'<div class="row">';
+       var r = pad[i];
+       for (j=0;j<r.length;j++) {
+           if (r[j] != ' ') {
+                var el = document.getElementById(r[j]);
+                el.addEventListener('click',function (e) {
+                                                    if (e.preventDefault) {
+                                                        e.preventDefault();
+                                                    };
+                                                    e.returnValue = false;
+                                                    this.style.backgroundColor = 'green';
+                                                    resetMyBackground(this);
+                                                    var answer = document.getElementById('answer');
+                                                    answer.innerHTML = accumulate_calc(this.id);
+                                                },false);
+                el.addEventListener('mouseover',function (e) {
+                                                    if (e.preventDefault) {
+                                                        e.preventDefault();
+                                                    };
+                                                    e.returnValue = false;
+                                                    this.style.backgroundColor = 'red';
+                                                },false);
+                el.addEventListener('mouseout',function (e) {
+                                                    if (e.preventDefault) {
+                                                        e.preventDefault();
+                                                    };
+                                                    e.returnValue = false;
+                                                    this.style.backgroundColor = 'white';
+                                                },false);
+           }
+       }
+   }
+
+
+   </script>
+
+   </body>
+   </html>
