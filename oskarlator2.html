@@ -2,7 +2,7 @@
    <head>
    <title>oskarlator</title>
    <style>
-   
+
    .left {
        float: left;
        width: 27%;
@@ -40,8 +40,10 @@
    <div id="calculator">
    </div>
    <script>
+   // the accumulator
+   var sum_str = '';
    
-   alert('here');
+   //alert('here');
    var pad = [['/', 'x', '.'],
               [' ', '+', '-'],
               ['7', '8', '9'],
@@ -71,10 +73,30 @@
            }
            str = str + '<div id="' + r[j] + '" class="' + cls + '">' + r[j] + '</div>';
        }
-       
+
        str = str + '<div class="clearer"></div></div>';
    }
    c.innerHTML = str;
+
+   function resetMyBackground(elem) {
+     setTimeout(function () {
+               elem.style.backgroundColor = 'white';
+           },
+        200);
+   }
+   
+   function accumulate_calc(key) {
+        if (key == 'C') {
+            sum_str = '';
+        }
+        else if (key == '=') {
+            sum_str = eval(sum_str);
+        }
+        else {
+            sum_str = sum_str + key;
+        }
+        return sum_str;
+   }
 
    for (var i=0;i<pad.length;i++) {
        str = str+'<div class="row">';
@@ -87,7 +109,10 @@
                                                         e.preventDefault();
                                                     };
                                                     e.returnValue = false;
-                                                    alert(this.id);
+                                                    this.style.backgroundColor = 'green';
+                                                    resetMyBackground(this);
+                                                    var answer = document.getElementById('answer');
+                                                    answer.innerHTML = accumulate_calc(this.id);
                                                 },false);
                 el.addEventListener('mouseover',function (e) {
                                                     if (e.preventDefault) {
@@ -108,10 +133,8 @@
    }
 
 
-
-
    </script>
-   
+
    <form id="calc">
    <input id="first" type="text" size="5" value="0"/>
    <select id="operator">
@@ -122,7 +145,7 @@
    </select>
    <input id="second" type="text" size="5" value="0"/>
    <input type='submit' id='submit' value='enter and calculate'/>
-        =   
+        =
    <div id="answer" style="display: inline; color: #1d551d;">0</div>
    </form>
    <script>
@@ -143,14 +166,14 @@
             case "/":
                 r = f / s;
                 break;
-            default : 
+            default :
                 alert("error check spelling");
                 break;
         }
         var el = document.getElementById('answer');
         el.innerHTML = String(r);
     }
-    
+
     var el = document.getElementById('submit');
     el.addEventListener('click',function (e) {
                                     if (e.preventDefault) {
@@ -159,7 +182,7 @@
                                     e.returnValue = false;
                                     oskarlator(this.form);
                                 },false);
-     
+
    </script>
    </body>
    </html>
